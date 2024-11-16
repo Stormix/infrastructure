@@ -61,7 +61,7 @@ Before proceeding to the Installation section, ensure to label the worker node w
 
 ```
 kubectl label nodes reclaim-the-stack-worker-1 node-role.kubernetes.io/worker=
-kubectl label nodes reclaim-the-stack-worker-1 node-role.kubernetes.io/database=
+kubectl label nodes worker-1 node-role.kubernetes.io/database=
 ```
 
 ## Installation
@@ -115,10 +115,8 @@ Create the Cloudflare tunnel:
 
 ```
 cloudflared tunnel login
-cloudflared tunnel --credentials-file tunnel-credentials.json create reclaim-the-stack
-kubectl create secret generic tunnel-credentials --dry-run=client \
-  --from-file=credentials.json=tunnel-credentials.json \
-  -o yaml | kubeseal -o yaml > platform/cloudflared/templates/tunnel-credentials.yaml
+cloudflared tunnel --credentials-file tunnel-credentials.json create stormix-k8s
+kubectl create secret generic tunnel-credentials --dry-run=client --from-file=credentials.json=tunnel-credentials.json -o yaml | kubeseal -o yaml > platform/cloudflared/templates/tunnel-credentials.yaml
 
 echo "" &&
 echo "Check out your tunnel at https://one.dash.cloudflare.com/$(yq .AccountTag tunnel-credentials.json -oy)/access/tunnels" &&
