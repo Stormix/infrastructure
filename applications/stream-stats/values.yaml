@@ -13,6 +13,8 @@ deployments:
     cpu: 250m
     env:
       - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
+      - { name: HOST, value: https://streamstats.stormix.dev }
+      - { name: TICKER_CRON_INTERVAL, value: "0 */15 * * * *" }
     readinessProbePath: /api
     port: 3000
     command: bun run start
