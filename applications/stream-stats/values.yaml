@@ -15,6 +15,7 @@ deployments:
       - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
     readinessProbePath: /api
     port: 3000
+    command: bun run start
 resources:
   redis:
     sentinels: 3
