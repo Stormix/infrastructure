@@ -5,14 +5,14 @@ deployments:
     memory: 512Mi
     cpu: 250m
     env:
-      REDIS_HOST: stream-stats-redis-master.default.svc
+      - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
     command: bun run worker
   web:
     replicas: 1
     memory: 512Mi
     cpu: 250m
     env:
-      REDIS_HOST: stream-stats-redis-master.default.svc
+      - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
     readinessProbePath: /api
     port: 3000
 resources:
@@ -44,7 +44,7 @@ resources:
       pg_stat_statements.track: top
 envFrom:
   - secretRef:
-      name: stream-stats
+      name: stream-stats # Create a dedicated application secret with k secrets:create stream-stats
 env:
   - { name: REDIS_URL, value: "redis://stream-stats-redis-master.default.svc:6379" }
   - { name: SENTINEL_URL, value: "redis-sentinel://rfs-stream-stats:26379/mymaster" }
