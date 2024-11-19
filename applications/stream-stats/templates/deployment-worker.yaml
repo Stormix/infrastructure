@@ -1,0 +1,58 @@
+# Creates a generic Deployment. Command to run must be configured via .scaling.worker.command.
+#
+# Example values.yaml:
+# image: docker.io/Stormix/stream-stats:latest
+# deployments:
+#   worker:
+#     replicas: 1
+#     memory: 512Mi
+#     cpu: 250m
+#     env: [] # Put ENV which should only apply to this deployment here
+#     command: <command-to-run>
+# envFrom:
+#   - secretRef:
+#       name: stream-stats # Create a dedicated application secret with k secrets:create stream-stats
+# env: [] # Put ENV which applies to all deployments here
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-worker
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: {{ .Values.scaling.worker.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-worker
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+        kubectl.kubernetes.io/default-container: command
+      labels:
+        app: {{ .Chart.Name }}-worker
+    spec:
+      containers:
+        - name: command
+          image: {{ .Values.image }}
+          command:
+            {{- range .Values.deployments.worker.command | split " " }}
+            - {{ . | quote }}
+            {{- end }}
+          # NOTE: We avoid putting a limit on CPU since Kubernetes throttling kills performance and CPU averages
+          # tends to be low, so we can allow some pods to burst when needed. Adjust as you see fit.
+          resources:
+            requests:
+              memory: {{ .Values.deployments.worker.memory }}
+              cpu: {{ .Values.deployments.worker.cpu }}
+            limits:
+              memory: {{ .Values.deployments.worker.memory }}
+          envFrom: {{ .Values.envFrom | toYaml | nindent 12 }}
+          env:
+            {{- if .Values.env }}
+            {{- .Values.env | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.deployments.worker.env }}
+            {{- .Values.deployments.worker.env | toYaml | nindent 12 }}
+            {{- end }}

@@ -9,6 +9,8 @@ no-autoupdate: true
 # - hostname: <application>.example.com
 #   service: http://<application>-web
 ingress:
+  - hostname: stream-stats.k8s.stormix.dev
+    service: http://stream-stats-web
   - hostname: argocd.k8s.stormix.dev
     service: https://argocd-server.argocd.svc
     originRequest:
