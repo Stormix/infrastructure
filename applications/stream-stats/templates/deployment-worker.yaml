@@ -21,7 +21,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: {{ .Values.scaling.worker.replicas }}
+  replicas: {{ .Values.deployments.worker.replicas }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-worker

@@ -27,7 +27,6 @@ resources:
     memory: 1Gi
     cpu: 1
     disk: 1Gi
-    # Tip: generate configuration based on CPU / RAM settings at https://pgtune.leopard.in.ua/
     config:
       max_connections: "40"
       shared_buffers: 256MB
@@ -45,7 +44,7 @@ resources:
       pg_stat_statements.track: top
 envFrom:
   - secretRef:
-      name: stream-stats # Create a dedicated application secret with k secrets:create stream-stats
+      name: stream-stats
 env:
   - { name: REDIS_URL, value: "redis://stream-stats-redis-master.default.svc:6379" }
   - { name: SENTINEL_URL, value: "redis-sentinel://rfs-stream-stats:26379/mymaster" }
