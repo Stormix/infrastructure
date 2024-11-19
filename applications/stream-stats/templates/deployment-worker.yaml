@@ -1,7 +1,7 @@
 # Creates a generic Deployment. Command to run must be configured via .scaling.worker.command.
 #
 # Example values.yaml:
-# image: docker.io/Stormix/stream-stats:latest
+# image: docker.io/stormix/stream-stats:latest
 # deployments:
 #   worker:
 #     replicas: 1
@@ -35,6 +35,8 @@ spec:
     spec:
       containers:
         - name: command
+          imagePullSecrets:
+            - name: regcred
           image: {{ .Values.image }}
           command:
             {{- range .Values.deployments.worker.command | split " " }}

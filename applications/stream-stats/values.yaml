@@ -1,4 +1,4 @@
-image: docker.io/Stormix/stream-stats:latest
+image: docker.io/stormix/stream-stats:latest
 deployments:
   worker:
     replicas: 1

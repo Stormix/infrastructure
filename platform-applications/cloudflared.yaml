@@ -13,7 +13,7 @@ spec:
   project: platform
   source:
     path: platform/cloudflared
-    repoURL: https://github.com/Stormix/infrastructure.git
+    repoURL: https://github.com/stormix/infrastructure.git
   syncPolicy:
     automated:
       allowEmpty: true

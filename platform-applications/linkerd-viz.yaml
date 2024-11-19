@@ -12,7 +12,7 @@ spec:
   project: platform
   source:
     path: platform/linkerd-viz
-    repoURL: https://github.com/Stormix/infrastructure.git
+    repoURL: https://github.com/stormix/infrastructure.git
   syncPolicy:
     automated:
       allowEmpty: true

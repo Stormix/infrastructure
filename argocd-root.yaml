@@ -32,7 +32,7 @@ spec:
   project: default
   source:
     path: platform-applications
-    repoURL: https://github.com/Stormix/infrastructure.git
+    repoURL: https://github.com/stormix/infrastructure.git
   syncPolicy:
     automated:
       allowEmpty: true
@@ -66,7 +66,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/Stormix/infrastructure.git
+        repoURL: https://github.com/stormix/infrastructure.git
         revision: HEAD
         directories:
           - path: applications/*
@@ -80,7 +80,7 @@ spec:
           allowEmpty: true
           prune: true
       source:
-        repoURL: https://github.com/Stormix/infrastructure.git
+        repoURL: https://github.com/stormix/infrastructure.git
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
