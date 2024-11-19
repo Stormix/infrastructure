@@ -33,10 +33,10 @@ spec:
       labels:
         app: {{ .Chart.Name }}-worker
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: command
-          imagePullSecrets:
-            - name: regcred
           image: {{ .Values.image }}
           command:
             {{- range .Values.deployments.worker.command | split " " }}

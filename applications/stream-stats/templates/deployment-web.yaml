@@ -39,10 +39,10 @@ spec:
         linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: web
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: web
-          imagePullSecrets:
-            - name: regcred
           image: {{ .Values.image }}
           command:
             {{- range .Values.deployments.web.command | default "bun run start" | split " " }}
