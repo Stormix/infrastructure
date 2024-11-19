@@ -52,8 +52,8 @@ spec:
             {{- if .Values.deployments.web.env }}
             {{- .Values.deployments.web.env | toYaml | nindent 12 }}
             {{- end }}
-            - name: PORT
-              value: {{ .Values.deployments.web.port }}
+            # - name: PORT
+            #   value: {{ .Values.deployments.web.port }}
 ---
 apiVersion: v1
 kind: Service
