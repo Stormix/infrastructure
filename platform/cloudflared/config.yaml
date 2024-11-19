@@ -5,7 +5,7 @@ no-autoupdate: true
 
 ingress:
   - hostname: streamstats.stormix.dev
-    service: http://stream-stats-web.default.svc
+    service: http://stream-stats-web.default.svc:3000
   - hostname: argocd.k8s.stormix.dev
     service: https://argocd-server.argocd.svc
     originRequest:
