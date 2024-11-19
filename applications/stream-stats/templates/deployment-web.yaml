@@ -45,7 +45,7 @@ spec:
           imagePullSecrets:
             - name: regcred
           command:
-            {{- range .Values.deployments.web.command | default "bundle exec rails server" | split " " }}
+            {{- range .Values.deployments.web.command | default "bun run start" | split " " }}
             - {{ . | quote }}
             {{- end }}
           ports:
