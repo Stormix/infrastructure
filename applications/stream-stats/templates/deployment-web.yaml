@@ -1,25 +1,3 @@
-# Creates a Deployment and Service for a web application listening on .Values.web.port.
-#
-# Example values.yaml:
-# image: docker.io/Stormix/stream-stats:latest
-# deployments:
-#   web:
-#     replicas: 1
-#     memory: 512Mi
-#     cpu: 250m
-#     # Put ENV which should only apply to the web deployment here
-#     env:
-#       - name: WEB_CONCURRENCY
-#         value: "2"
-#     # readinessProbePath: /up # when this path returns 200 the pod will be considered ready
-#     # port: <custom-port> (if you don't want to use port 80)
-#     # command: <custom-command> (if you don't want to run bin/rails server)
-# envFrom:
-#   - secretRef:
-#       name: stream-stats # Create a dedicated application secret with k secrets:create stream-stats
-# env: [] # Put ENV which applies to all deployments here
-
-{{- $port := .Values.deployments.web.port | default 80 }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,7 +25,7 @@ spec:
             - {{ . | quote }}
             {{- end }}
           ports:
-            - containerPort: {{ $port }}
+            - containerPort: {{ .Values.deployments.web.port }}
           securityContext:
             capabilities:
               add:
@@ -56,7 +34,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.deployments.web.readinessProbePath }}
-              port: {{ $port }}
+              port: {{ .Values.deployments.web.port }}
           {{- end }}
           # NOTE: We avoid putting a limit on CPU since Kubernetes throttling kills performance and CPU averages
           # tends to be low, so we can allow some pods to burst when needed. Adjust as you see fit.
@@ -75,7 +53,7 @@ spec:
             {{- .Values.deployments.web.env | toYaml | nindent 12 }}
             {{- end }}
             - name: PORT
-              value: "{{ $port }}"
+              value: {{ .Values.deployments.web.port }}
 ---
 apiVersion: v1
 kind: Service
@@ -84,8 +62,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ $port }}
-      targetPort: {{ $port }}
+    - port: {{ .Values.deployments.web.port }}
+      targetPort: {{ .Values.deployments.web.port }}
       protocol: TCP
   selector:
     app: {{ .Chart.Name }}-web
