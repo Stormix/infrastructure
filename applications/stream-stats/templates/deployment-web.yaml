@@ -41,9 +41,9 @@ spec:
     spec:
       containers:
         - name: web
-          image: {{ .Values.image }}
           imagePullSecrets:
             - name: regcred
+          image: {{ .Values.image }}
           command:
             {{- range .Values.deployments.web.command | default "bun run start" | split " " }}
             - {{ . | quote }}
