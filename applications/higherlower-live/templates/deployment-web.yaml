@@ -39,6 +39,8 @@ spec:
         linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: web
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: web
           image: {{ .Values.image }}
