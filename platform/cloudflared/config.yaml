@@ -5,7 +5,7 @@ no-autoupdate: true
 
 ingress:
   - hostname: higherlower.stormix.dev
-    service: http://higherlower-live-web
+    service: http://higherlower-live-web.default.svc:3000
   - hostname: streamstats.stormix.dev
     service: http://stream-stats-web.default.svc:3000
   - hostname: argocd.k8s.stormix.dev
