@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: higherlower-live
+  namespace: default
+spec:
+  encryptedData:
+    PLACEHOLDER: AgAtJpJItW8vuMjHjF1PtQbtKzJrJDf/govz6j3plSKDXokgZb+mJwiqfNBEGUG7mCqZqzZG8LciKOax+jGXm4RBtsas96POFT9LIOR4dqxARimstv+c/G7TtvJUlNLGatyBc7aHAVD67swS3J1DQ01OjHPB30RYJ15FW01T36oc+3p2M1SYuIxHvSv+GfBEoxahOLALV40m1faKDfto1iTi0eXF/nl/Fsg/h3/bETgEQSht7SjXRw4b+2yAdsz3UZeCXQ0/ROk/nApaV60AancaM3O8EojtwfcwhzboxjYTB57l7Hx91EuyQsq9Q6L8jvwu5rbI7Q6J/yTtpVu544ifb+j2YEgWJTFt9ixMmibTf7ZW6kRdv8cVi9pnIZyIOCFCTTeV44R+8rZ0EKMPrC8qbMt2BH6xuIIqaaCeyA7Ku+QuiW/j2eDV1Nq+/4sLnGAZFHGRTBt1hP0kEMyTDZaEvBC5y1QieHN46gSg27H6yerqxYXosgeKMR3tNPCYvCL1zufdle6zFwr8iJl2l/cYjsrAeLVgKOz3Tz0hynZeI0cDHbC90lCxm42/6Vw2q6QRMnAAadWo3w7R0Gq4OFwHyJXJ+J0RyFO6/BIUkYboRab5kuVxc2Ozocvj842j3BUpkjnT0BRdwoTc1rC4Sp97xFL0Msd7hT0nIO3konqN0FZf/CjLrtz6LDTL4ymHbGcBzVEVYBtU6pZz
+  template:
+    metadata:
+      creationTimestamp: null
+      name: higherlower-live
+      namespace: default
+    type: opaque
