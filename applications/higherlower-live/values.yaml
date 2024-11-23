@@ -1,4 +1,4 @@
-image: docker.io/Stormix/higherlower-live:latest
+image: docker.io/stormix/higherlower-live:latest
 deployments:
   web:
     replicas: 1

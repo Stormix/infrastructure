@@ -1,7 +1,7 @@
 # Creates a Deployment and Service for a web application listening on .Values.web.port.
 #
 # Example values.yaml:
-# image: docker.io/Stormix/higherlower-live:latest
+# image: docker.io/stormix/higherlower-live:latest
 # deployments:
 #   web:
 #     replicas: 1
