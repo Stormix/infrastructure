@@ -14,7 +14,7 @@ resources:
   postgres:
     replicas: 1
     memory: 1Gi
-    cpu: 1
+    cpu:  250m
     disk: 1Gi
     config:
       max_connections: "40"
