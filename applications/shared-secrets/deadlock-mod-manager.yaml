@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: deadlock-mod-manager
+  namespace: default
+spec:
+  encryptedData:
+    PLACEHOLDER: AgBhQ2cnE1btqScEg/N6yU99aSoYAxm4eJEtj+I9CvwaaCEmGexfhmnTJQD9MJ/RNtNc/1uQCZ3RrBugAHDYNQRwi8lY7uTcFrDtTGljUjR5QFydSf/Xvm1gtt0m3eZwb+HoADjMuYlg4yRcDrcGG32dVJt8iQvFoc4QaMGFGh/t26E66QEexeKzN/RKrvYBYjZj/a2TppfrGTsStIKdwXRxHMiohVDYCj/68Fg7tWAtPLPuvsJtVKZ9RxGbYo7bj+AUtinQqHBNqUuO0TxZnHOvk/P5T5p7rwSZnzKDn3G7kfAnj7NQguaUxbbvbo/D3gqKUF1j1IDQsjAlmENh9uWLBYZzVttf9lZvreodn+c/IS/YWDvxmKbB4GAac3NMn0IqeSfZ/sdPhsYx/xnTV+GvZr9R+sUUyx9fCrxKOv41jBt/0abYFDEqcTS7aS3qp0W+/VuGmE5IOi34/OEsq5hExqJhqhOY4xzalDyFM3qVx8nnfoT58mGymBt6kygVUHAaOZOx6vZZ9cMq4hgWTg7ykQQ2dtMtg5aM6ramZhzhRApPNV9RBFRfPPvR/WbBgmXPYoA3vmL6YlDzSc7lECE49liB0dld/hKIdcPH1d8iVenIh3UuZ7Ym6ry5DDJm3a/vn9jZskOIdRFzLJl/f+qucFnQLs0u2H8Qt7p4S3PdKoxxqmY7C7EWJ4ApMl50nIiHUeoQ75BgFhHd
+  template:
+    metadata:
+      creationTimestamp: null
+      name: deadlock-mod-manager
+      namespace: default
+    type: opaque
