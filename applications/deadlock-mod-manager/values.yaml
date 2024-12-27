@@ -1,11 +1,21 @@
-deployments: {}
+image: stormix/deadlock-mods-api:latest
+deployments:
+  web:
+    replicas: 1
+    memory: 512Mi
+    cpu: 250m
+    env:
+      - name: WEB_CONCURRENCY
+        value: "2"
+    readinessProbePath: /
+    port: 9000
+    command: bun run src/index.ts
 resources:
   postgres:
     replicas: 1
     memory: 1Gi
     cpu: 250m
     disk: 1Gi
-    # Tip: generate configuration based on CPU / RAM settings at https://pgtune.leopard.in.ua/
     config:
       max_connections: "40"
       shared_buffers: 256MB
@@ -21,6 +31,8 @@ resources:
       max_wal_size: 4GB
       pg_stat_statements.max: "10000"
       pg_stat_statements.track: top
-envFrom: []
+envFrom:
+  - secretRef:
+      name: deadlock-mod-manager # Create a dedicated application secret with k secrets:create deadlock-mod-manager
 env:
   - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: deadlock-mod-manager-app, key: uri } } }

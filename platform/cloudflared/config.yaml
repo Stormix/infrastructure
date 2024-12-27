@@ -4,6 +4,8 @@ metrics: 0.0.0.0:2000
 no-autoupdate: true
 
 ingress:
+  - hostname: api.deadlock.stormix.dev
+    service: http://deadlock-mod-manager-web.default.svc:9000
   - hostname: higherlower.stormix.dev
     service: http://higherlower-live-web.default.svc:3000
   - hostname: streamstats.stormix.dev
