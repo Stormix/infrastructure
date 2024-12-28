@@ -17,6 +17,11 @@ data:
   #         clientID: <id>.apps.googleusercontent.com
   #         clientSecret: $argocd-custom-secret:oidc.google.clientSecret
 
+
+  accounts.stormix: apiKey, login
+  policy.csv: |
+    g, stormix, role:admin
+
   # Enable health check for Application resources to make sync-wave work properly:
   # https://kubito.dev/posts/enable-argocd-sync-wave-between-apps/
   resource.customizations.health.argoproj.io_Application: |
