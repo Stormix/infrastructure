@@ -12,7 +12,7 @@ deployments:
     command: bun run src/index.ts
 resources:
   postgres:
-    replicas: 0
+    replicas: 1
     memory: 512Mi
     cpu: 250m
     disk: 1Gi
