@@ -1,7 +1,7 @@
 image: stormix/deadlock-mods-api:latest
 deployments:
   web:
-    replicas: 1
+    replicas: 3
     memory: 512Mi
     cpu: 250m
     env:
@@ -17,7 +17,7 @@ resources:
     cpu: 250m
     disk: 1Gi
     config:
-      max_connections: "40"
+      max_connections: "200"
       shared_buffers: 256MB
       effective_cache_size: 768MB
       maintenance_work_mem: 64MB
