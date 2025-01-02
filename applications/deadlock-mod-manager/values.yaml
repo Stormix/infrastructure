@@ -12,7 +12,7 @@ deployments:
     command: bun run src/index.ts
 resources:
   postgres:
-    replicas: 3
+    replicas: 0
     memory: 512Mi
     cpu: 250m
     disk: 1Gi
@@ -35,4 +35,4 @@ envFrom:
   - secretRef:
       name: deadlock-mod-manager # Create a dedicated application secret with k secrets:create deadlock-mod-manager
 env:
-  - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: deadlock-mod-manager-app, key: uri } } }
+  - { name: DATABASE_URL_OLD, valueFrom: { secretKeyRef: { name: deadlock-mod-manager-app, key: uri } } }
