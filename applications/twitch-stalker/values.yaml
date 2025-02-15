@@ -1,4 +1,4 @@
-image: docker.io/stormix/twitch-stalker-server:latest
+image: stormix/twitch-stalker-server:latest
 deployments:
   web:
     replicas: 1
