@@ -1,0 +1,17 @@
+image: docker.io/stormix/twitch-stalker-server:latest
+deployments:
+  web:
+    replicas: 1
+    memory: 512Mi
+    cpu: 250m
+    env:
+      - name: WEB_CONCURRENCY
+        value: "2"
+    readinessProbePath: /api/health
+    port: 3000
+    command: bun start
+resources: {}
+envFrom:
+  - secretRef:
+      name: twitch-stalker # Create a dedicated application secret with k secrets:create twitch-stalker
+env: []

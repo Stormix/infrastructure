@@ -4,6 +4,8 @@ metrics: 0.0.0.0:2000
 no-autoupdate: true
 
 ingress:
+  - hostname: twitch-stalker.stormix.dev
+    service: http://twitch-stalker-web.default.svc:3000
   - hostname: api.deadlockmods.app
     service: http://deadlock-mod-manager-web.default.svc:9000
   - hostname: higherlower.stormix.dev
