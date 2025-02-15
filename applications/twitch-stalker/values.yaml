@@ -10,8 +10,15 @@ deployments:
     readinessProbePath: /api/health
     port: 3000
     command: bun start
-resources: {}
+resources:
+  redis:
+    sentinels: 3
+    replicas: 2
+    memory: 100Mi # must use Gi or Mi format
+    cpu: 250m
+    disk: 500Mi
 envFrom:
   - secretRef:
       name: twitch-stalker # Create a dedicated application secret with k secrets:create twitch-stalker
-env: []
+env:
+  - { name: REDIS_URL, value: "redis://twitch-stalker-redis-master.default.svc:6379" }
