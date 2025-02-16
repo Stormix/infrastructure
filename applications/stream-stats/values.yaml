@@ -3,14 +3,14 @@ deployments:
   worker:
     replicas: 1
     memory: 512Mi
-    cpu: 250m
+    cpu: 75m
     env:
       - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
     command: bun run worker
   web:
     replicas: 1
     memory: 512Mi
-    cpu: 250m
+    cpu: 75m
     env:
       - { name: REDIS_HOST, value: stream-stats-redis-master.default.svc }
       - { name: HOST, value: https://streamstats.stormix.dev }
@@ -23,12 +23,12 @@ resources:
     sentinels: 3
     replicas: 2
     memory: 100Mi # must use Gi or Mi format
-    cpu: 250m
+    cpu: 100m
     disk: 500Mi
   postgres:
     replicas: 1
     memory: 1Gi
-    cpu: 250m
+    cpu: 100m
     disk: 1Gi
     config:
       max_connections: "40"

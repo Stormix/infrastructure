@@ -3,7 +3,7 @@ deployments:
   web:
     replicas: 1
     memory: 512Mi
-    cpu: 250m
+    cpu: 50m
     env:
       - name: WEB_CONCURRENCY
         value: "2"
@@ -14,7 +14,7 @@ resources:
   postgres:
     replicas: 1
     memory: 1Gi
-    cpu:  250m
+    cpu:  100m
     disk: 1Gi
     config:
       max_connections: "40"

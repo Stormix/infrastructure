@@ -3,7 +3,7 @@ deployments:
   web:
     replicas: 1
     memory: 512Mi
-    cpu: 250m
+    cpu: 100m
     env:
       - name: WEB_CONCURRENCY
         value: "2"
@@ -15,7 +15,7 @@ resources:
     sentinels: 3
     replicas: 2
     memory: 100Mi # must use Gi or Mi format
-    cpu: 250m
+    cpu: 100m
     disk: 500Mi
 envFrom:
   - secretRef:
