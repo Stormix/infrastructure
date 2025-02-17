@@ -212,7 +212,7 @@ spec:
       targetPort: {{ $port }}
       protocol: TCP
   selector:
-    app: {{ .Chart.Name }}-monitor
+    app: {{ .Chart.Name }}-monitor-service
 ---
 apiVersion: v1
 kind: Service
@@ -225,7 +225,7 @@ spec:
       targetPort: {{ $port }}
       protocol: TCP
   selector:
-    app: {{ .Chart.Name }}-collector
+    app: {{ .Chart.Name }}-collector-service
 ---
 apiVersion: v1
 kind: Service
@@ -238,7 +238,7 @@ spec:
       targetPort: {{ $port }}
       protocol: TCP
   selector:
-    app: {{ .Chart.Name }}-writer
+    app: {{ .Chart.Name }}-writer-service
 ---
 apiVersion: v1
 kind: Service
