@@ -6,7 +6,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 2
+  replicas: {{ .Values.deployments.web.replicas }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-monitor
@@ -59,7 +59,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-collector
@@ -112,7 +112,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 2
+  replicas: {{ .Values.deployments.web.replicas }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-writer
