@@ -9,8 +9,7 @@ resources:
       additionalConfig: |
         log.console.level = info
         vm_memory_high_watermark.relative = 0.7
-        cluster_formation.k8s.address_type = hostname
-        cluster_formation.k8s.hostname_suffix = .huginn-nodes.default
+        cluster_formation.k8s.address_type = ip
   redis:
     sentinels: 3
     replicas: 2
