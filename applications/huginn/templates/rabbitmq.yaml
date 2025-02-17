@@ -33,7 +33,6 @@ spec:
     {{- if .Values.resources.rabbitmq.config }}
     additionalConfig: {{ .Values.resources.rabbitmq.config.additionalConfig | quote }}
     {{- end }}
-    # Add additional configuration for K8s peer discovery
     additionalPlugins:
       - rabbitmq_peer_discovery_k8s
     advancedConfig: |
