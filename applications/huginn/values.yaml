@@ -3,7 +3,7 @@ resources:
   rabbitmq:
     replicas: 3
     memory: 512Mi
-    cpu: 250m
+    cpu: 100m
     disk: 1Gi
     config:
       additionalConfig: |
@@ -13,14 +13,13 @@ resources:
     sentinels: 3
     replicas: 2
     memory: 100Mi # must use Gi or Mi format
-    cpu: 250m
+    cpu: 100m
     disk: 500Mi
   postgres:
     replicas: 2
     memory: 1Gi
-    cpu: 1
+    cpu: 100m
     disk: 10Gi
-    # Tip: generate configuration based on CPU / RAM settings at https://pgtune.leopard.in.ua/
     config:
       max_connections: "40"
       shared_buffers: 256MB
