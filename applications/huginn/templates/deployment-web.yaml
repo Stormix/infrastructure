@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-monitor
+  name: {{ .Chart.Name }}-monitor-service
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-monitor
+      app: {{ .Chart.Name }}-monitor-service
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-monitor
+        app: {{ .Chart.Name }}-monitor-service
       annotations:
         linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: monitor
@@ -55,18 +55,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-collector
+  name: {{ .Chart.Name }}-collector-service
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-collector
+      app: {{ .Chart.Name }}-collector-service
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-collector
+        app: {{ .Chart.Name }}-collector-service
       annotations:
         linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: collector
@@ -108,18 +108,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-writer
+  name: {{ .Chart.Name }}-writer-service
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-writer
+      app: {{ .Chart.Name }}-writer-service
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-writer
+        app: {{ .Chart.Name }}-writer-service
       annotations:
         linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: writer
