@@ -1,27 +1,6 @@
-# Creates a Deployment and Service for a web application listening on .Values.web.port.
-#
-# Example values.yaml:
-# image: docker.io/stormix/huginn:latest
-# deployments:
-#   web:
-#     replicas: 1
-#     memory: 512Mi
-#     cpu: 250m
-#     # Put ENV which should only apply to the web deployment here
-#     env:
-#       - name: WEB_CONCURRENCY
-#         value: "2"
-#     # readinessProbePath: /up # when this path returns 200 the pod will be considered ready
-#     # port: <custom-port> (if you don't want to use port 80)
-#     # command: <custom-command> (if you don't want to run bin/rails server)
-# envFrom:
-#   - secretRef:
-#       name: huginn # Create a dedicated application secret with k secrets:create huginn
-# env: [] # Put ENV which applies to all deployments here
-
 {{- $port := .Values.deployments.web.port | default 80 }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-monitor
   annotations:
@@ -74,7 +53,7 @@ spec:
               value: "{{ $port }}"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-collector
   annotations:
@@ -127,7 +106,7 @@ spec:
               value: "{{ $port }}"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-writer
   annotations:
