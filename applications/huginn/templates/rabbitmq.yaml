@@ -33,6 +33,20 @@ spec:
     {{- if .Values.resources.rabbitmq.config }}
     additionalConfig: {{ .Values.resources.rabbitmq.config.additionalConfig | quote }}
     {{- end }}
+    # Add additional configuration for K8s peer discovery
+    additionalPlugins:
+      - rabbitmq_peer_discovery_k8s
+    advancedConfig: |
+      [
+        {rabbit, [
+          {cluster_formation, [
+            {peer_discovery_backend, rabbit_peer_discovery_k8s},
+            {k8s_host, "kubernetes.default.svc.cluster.local"},
+            {k8s_address_type, hostname},
+            {k8s_scheme, https}
+          ]}
+        ]}
+      ].
   affinity:
     tolerations:
       - key: role
