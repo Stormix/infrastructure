@@ -36,4 +36,4 @@ env:
   - { name: APP_REDIS_URL, value: "redis://twitch-stalker-redis-master.default.svc:6379" }
   - { name: APP_FLARESOLVERR_URL, value: "http://huginn-flaresolverr.default.svc:8191" }
   - { name: APP_DATABASE_URL, valueFrom: { secretKeyRef: { name: huginn-app, key: uri } } }
-  - { name: APP_PARTITION_ID, valueFrom: 0 }
+  - { name: APP_PARTITION_ID, valueFrom: "0" }

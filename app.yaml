@@ -1,0 +1,226 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2025-02-17T02:06:04Z"
+  deletionGracePeriodSeconds: 0
+  deletionTimestamp: "2025-02-17T02:14:12Z"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  generation: 67
+  name: huginn
+  namespace: argocd
+  ownerReferences:
+  - apiVersion: argoproj.io/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ApplicationSet
+    name: applications
+    uid: 30dd568d-401d-4f5c-86be-ed3fc508b99b
+  resourceVersion: "30852862"
+  uid: f893c9fd-76f6-4470-becb-0ba61910aeff
+operation:
+  initiatedBy:
+    automated: true
+  retry:
+    limit: 5
+  sync:
+    prune: true
+    revision: 2fe141c19dab636fbad92ba0a02e8eb354831f73
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: applications
+  source:
+    path: applications/huginn
+    repoURL: https://github.com/Stormix/infrastructure.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+status:
+  conditions:
+  - lastTransitionTime: "2025-02-17T02:14:12Z"
+    message: 'Failed to load target state: failed to generate manifest for source
+      1 of 1: rpc error: code = Unknown desc = applications/huginn: app path does
+      not exist'
+    type: ComparisonError
+  controllerNamespace: argocd
+  health:
+    status: Healthy
+  operationState:
+    finishedAt: "2025-02-17T02:15:24Z"
+    message: 'one or more objects failed to apply, reason: StatefulSet in version
+      "v1" cannot be handled as a StatefulSet: json: cannot unmarshal number into
+      Go struct field EnvVar.spec.template.spec.containers.env.valueFrom of type v1.EnvVarSource.
+      Retrying attempt #5 at 2:16AM.'
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: 2fe141c19dab636fbad92ba0a02e8eb354831f73
+    phase: Running
+    retryCount: 5
+    startedAt: "2025-02-17T02:12:48Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/huginn-flaresolverr configured
+        name: huginn-flaresolverr
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/huginn-writer configured
+        name: huginn-writer
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/huginn-monitor configured
+        name: huginn-monitor
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/huginn-collector configured
+        name: huginn-collector
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/huginn-flaresolverr configured
+        name: huginn-flaresolverr
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Failed
+        kind: StatefulSet
+        message: 'StatefulSet in version "v1" cannot be handled as a StatefulSet:
+          json: cannot unmarshal number into Go struct field EnvVar.spec.template.spec.containers.env.valueFrom
+          of type v1.EnvVarSource'
+        name: huginn-collector-service
+        namespace: default
+        status: SyncFailed
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Failed
+        kind: StatefulSet
+        message: 'StatefulSet in version "v1" cannot be handled as a StatefulSet:
+          json: cannot unmarshal number into Go struct field EnvVar.spec.template.spec.containers.env.valueFrom
+          of type v1.EnvVarSource'
+        name: huginn-monitor-service
+        namespace: default
+        status: SyncFailed
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Failed
+        kind: StatefulSet
+        message: 'StatefulSet in version "v1" cannot be handled as a StatefulSet:
+          json: cannot unmarshal number into Go struct field EnvVar.spec.template.spec.containers.env.valueFrom
+          of type v1.EnvVarSource'
+        name: huginn-writer-service
+        namespace: default
+        status: SyncFailed
+        syncPhase: Sync
+        version: v1
+      - group: postgresql.cnpg.io
+        hookPhase: Running
+        kind: Cluster
+        message: cluster.postgresql.cnpg.io/huginn configured
+        name: huginn
+        namespace: default
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 2fe141c19dab636fbad92ba0a02e8eb354831f73
+      source:
+        path: applications/huginn
+        repoURL: https://github.com/Stormix/infrastructure.git
+  reconciledAt: "2025-02-17T02:14:12Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Service
+    name: huginn-collector
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: huginn-flaresolverr
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: huginn-monitor
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: huginn-writer
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: huginn-flaresolverr
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  - group: postgresql.cnpg.io
+    kind: Cluster
+    name: huginn
+    namespace: default
+    requiresPruning: true
+    status: Unknown
+    version: v1
+  summary:
+    images:
+    - cr.l5d.io/linkerd/proxy-init:v2.2.3
+    - cr.l5d.io/linkerd/proxy:stable-2.14.10
+    - ghcr.io/cloudnative-pg/cloudnative-pg:1.24.1
+    - ghcr.io/cloudnative-pg/postgresql:16.3
+    - ghcr.io/flaresolverr/flaresolverr:latest
+  sync:
+    comparedTo:
+      destination:
+        namespace: default
+        server: https://kubernetes.default.svc
+      source:
+        path: applications/huginn
+        repoURL: https://github.com/Stormix/infrastructure.git
+    status: Unknown
