@@ -4,6 +4,8 @@ metrics: 0.0.0.0:2000
 no-autoupdate: true
 
 ingress:
+  - hostname: huginn.k8s.stormix.dev
+    service: http://huginn-web
   - hostname: twitch-stalker.stormix.dev
     service: http://twitch-stalker-web.default.svc:3000
   - hostname: api.deadlockmods.app
