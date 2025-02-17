@@ -1,6 +1,6 @@
 {{- $port := .Values.deployments.web.port | default 80 }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-monitor-service
   annotations:
@@ -53,7 +53,7 @@ spec:
               value: "{{ $port }}"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-collector-service
   annotations:
@@ -106,7 +106,7 @@ spec:
               value: "{{ $port }}"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-writer-service
   annotations:
