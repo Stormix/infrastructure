@@ -1,6 +1,6 @@
 deployments:
   web:
-    replicas: 1
+    replicas: 2
     memory: 512Mi
     cpu: 250m
     env:
