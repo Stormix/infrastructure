@@ -17,13 +17,15 @@ configMapGenerator:
         grafana_dashboard: "1"
     files:
       - dashboards/rabbitmq.json
+generatorOptions:
+  disableNameSuffixHash: true
 
-patchesJson6902:
+patches:
   - target:
       version: v1
       kind: ConfigMap
       name: rabbitmq-dashboards
-    patch: |-
+    patch: |
       - op: replace
         path: /metadata/namespace
-        value: monitoring
+        value: monitoring 
