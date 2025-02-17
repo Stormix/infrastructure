@@ -1,0 +1,46 @@
+# Creates a RabbitMQ cluster via the RabbitMQ Cluster Operator.
+#
+# Example values.yaml:
+# resources:
+#   rabbitmq:
+#     replicas: 3
+#     memory: 512Mi
+#     cpu: 250m
+#     disk: 1Gi
+#     # Optional RabbitMQ configuration
+#     config:
+#       additionalConfig: |
+#         log.console.level = info
+#         vm_memory_high_watermark.relative = 0.7
+# env:
+#   - { name: RABBITMQ_URL, valueFrom: { secretKeyRef: { name: %{application}%{suffix}-rabbitmq, key: url } } }
+
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: {{ .Chart.Name }}%{suffix}
+spec:
+  replicas: {{ .Values.resources.%{camelName}.replicas }}
+  resources:
+    requests:
+      cpu: {{ .Values.resources.%{camelName}.cpu }}
+      memory: {{ .Values.resources.%{camelName}.memory }}
+    limits:
+      memory: {{ .Values.resources.%{camelName}.memory }}
+  persistence:
+    storage: {{ .Values.resources.%{camelName}.disk }}
+  rabbitmq:
+    {{- if .Values.resources.%{camelName}.config }}
+    additionalConfig: {{ .Values.resources.%{camelName}.config.additionalConfig | quote }}
+    {{- end }}
+  affinity:
+    tolerations:
+      - key: role
+        value: database
+        effect: NoSchedule
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/database
+                operator: Exists

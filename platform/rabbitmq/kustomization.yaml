@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rabbitmq-system
+resources:
+  - namespace.yaml
+  - github.com/rabbitmq/cluster-operator/config/crd?ref=v2.7.0
+  - github.com/rabbitmq/cluster-operator/config/rbac?ref=v2.7.0
+  - github.com/rabbitmq/cluster-operator/config/manager?ref=v2.7.0
+
+configMapGenerator:
+  - name: rabbitmq-dashboards
+    namespace: monitoring
+    options:
+      annotations:
+        argocd.argoproj.io/sync-options: Replace=true
+      labels:
+        grafana_dashboard: "1"
+    files:
+      - dashboards/rabbitmq.json
+
+patchesJson6902:
+  - target:
+      version: v1
+      kind: ConfigMap
+      name: rabbitmq-dashboards
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: monitoring

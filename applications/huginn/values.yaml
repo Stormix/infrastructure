@@ -1,0 +1,4 @@
+deployments: {}
+resources: {}
+envFrom: []
+env: []
