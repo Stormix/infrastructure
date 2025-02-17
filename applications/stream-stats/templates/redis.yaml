@@ -38,7 +38,7 @@ spec:
           cpu: 100m
           memory: 50Mi
         limits:
-          cpu: 200m
+          cpu: 100m
           memory: 100Mi
   redis:
     replicas: {{ .Values.resources.redis.replicas }}
@@ -70,7 +70,7 @@ spec:
           cpu: 100m
           memory: 50Mi
         limits:
-          cpu: 200m
+          cpu: 100m
           memory: 100Mi
     storage:
       persistentVolumeClaim:
