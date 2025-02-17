@@ -23,21 +23,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-web
+  name: {{ .Chart.Name }}-monitor
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: {{ .Values.deployments.web.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-web
+      app: {{ .Chart.Name }}-monitor
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-web
+        app: {{ .Chart.Name }}-monitor
       annotations:
         linkerd.io/inject: enabled
-        kubectl.kubernetes.io/default-container: web
+        kubectl.kubernetes.io/default-container: monitor
     spec:
       containers:
         - name: monitor
@@ -72,6 +72,27 @@ spec:
             {{- end }}
             - name: PORT
               value: "{{ $port }}"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-collector
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: {{ .Values.deployments.web.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-collector
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-collector
+      annotations:
+        linkerd.io/inject: enabled
+        kubectl.kubernetes.io/default-container: collector
+    spec:
+      containers:
         - name: collector
           image: stormix/huginn-collector:latest
           ports:
@@ -104,6 +125,27 @@ spec:
             {{- end }}
             - name: PORT
               value: "{{ $port }}"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-writer
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: {{ .Values.deployments.web.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-writer
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-writer
+      annotations:
+        linkerd.io/inject: enabled
+        kubectl.kubernetes.io/default-container: writer
+    spec:
+      containers:
         - name: writer
           image: stormix/huginn-writer:latest
           ports:
@@ -136,6 +178,27 @@ spec:
             {{- end }}
             - name: PORT
               value: "{{ $port }}"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-flaresolverr
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: {{ .Values.deployments.web.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-flaresolverr
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-flaresolverr
+      annotations:
+        linkerd.io/inject: enabled
+        kubectl.kubernetes.io/default-container: flaresolverr
+    spec:
+      containers:
         - name: flaresolverr
           image: ghcr.io/flaresolverr/flaresolverr:latest
           ports:
@@ -158,10 +221,11 @@ spec:
             - name: TZ
               value: "Europe/London"
 ---
+# Services for each deployment
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Chart.Name }}-web
+  name: {{ .Chart.Name }}-monitor
 spec:
   type: ClusterIP
   ports:
@@ -169,4 +233,43 @@ spec:
       targetPort: {{ $port }}
       protocol: TCP
   selector:
-    app: {{ .Chart.Name }}-web
+    app: {{ .Chart.Name }}-monitor
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-collector
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ $port }}
+      targetPort: {{ $port }}
+      protocol: TCP
+  selector:
+    app: {{ .Chart.Name }}-collector
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-writer
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ $port }}
+      targetPort: {{ $port }}
+      protocol: TCP
+  selector:
+    app: {{ .Chart.Name }}-writer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-flaresolverr
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8191
+      targetPort: 8191
+      protocol: TCP
+  selector:
+    app: {{ .Chart.Name }}-flaresolverr
