@@ -52,7 +52,7 @@ spec:
             - name: APP_PARTITION
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.annotations['statefulset.kubernetes.io/pod-name']
+                  fieldPath: metadata.name
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -107,7 +107,7 @@ spec:
             - name: APP_PARTITION
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.annotations['statefulset.kubernetes.io/pod-name']
+                  fieldPath: metadata.name
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -164,7 +164,7 @@ spec:
             - name: APP_PARTITION
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.annotations['statefulset.kubernetes.io/pod-name']
+                  fieldPath: metadata.name
 ---
 apiVersion: apps/v1
 kind: Deployment
