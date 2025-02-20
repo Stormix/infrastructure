@@ -189,7 +189,7 @@ spec:
         - name: kick
           image: stormix/huginn-kick:latest
           ports:
-            - containerPort: {{ $port }}
+            - containerPort: 3000
           securityContext:
             capabilities:
               add:
