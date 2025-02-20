@@ -173,7 +173,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-flaresolverr
@@ -205,8 +205,6 @@ spec:
               value: "debug"
             - name: TZ
               value: "Europe/Paris"
-            - name: PROMETHEUS_ENABLED
-              value: "true"
 ---
 # Services for each deployment
 apiVersion: v1
