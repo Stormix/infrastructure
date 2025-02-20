@@ -38,3 +38,4 @@ env:
   - { name: APP_PARTITION_ID, value: "0" }
   - { name: APP_FLARESOLVERR_URL, value: "http://huginn-flaresolverr.default.svc.cluster.local:8191" }
   - { name: RUST_LOG, value: "info" }
+  - { name: APP_FLARESOLVERR_MAX_TIMEOUT, value: "15000" }
