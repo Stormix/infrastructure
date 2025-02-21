@@ -183,7 +183,7 @@ spec:
         app: {{ .Chart.Name }}-kick
       annotations:
         linkerd.io/inject: enabled
-        kubectl.kubernetes.io/default-container: writer
+        kubectl.kubernetes.io/default-container: kick
     spec:
       containers:
         - name: kick
@@ -198,6 +198,13 @@ spec:
             httpGet:
               path: /
               port: 3000
+          resources:
+            requests:
+              memory: {{ .Values.deployments.web.memory }}
+              cpu: {{ .Values.deployments.web.cpu }}
+            limits:
+              memory: {{ .Values.deployments.web.memory }}
+          envFrom: {{ .Values.envFrom | toYaml | nindent 12 }}
           env:
             {{- if .Values.env }}
             {{- .Values.env | toYaml | nindent 12 }}
@@ -207,7 +214,6 @@ spec:
             {{- end }}
             - name: PORT
               value: "3000"
----
 # Services for each deployment
 apiVersion: v1
 kind: Service
