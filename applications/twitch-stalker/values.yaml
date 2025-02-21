@@ -1,7 +1,7 @@
 image: stormix/twitch-stalker-server:latest
 deployments:
   web:
-    replicas: 1
+    replicas: 3
     memory: 512Mi
     cpu: 100m
     env:
