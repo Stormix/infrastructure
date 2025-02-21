@@ -8,32 +8,11 @@ deployments:
         value: "info"
     readinessProbePath: /health # when this path returns 200 the pod will be considered ready
     port: 8080
-resources:
-  postgres:
-    replicas: 2
-    memory: 1Gi
-    cpu: 100m
-    disk: 10Gi
-    config:
-      max_connections: "40"
-      shared_buffers: 256MB
-      effective_cache_size: 768MB
-      maintenance_work_mem: 64MB
-      checkpoint_completion_target: "0.9"
-      wal_buffers: 7864kB
-      default_statistics_target: "100"
-      random_page_cost: "1.1"
-      effective_io_concurrency: "200"
-      work_mem: 3276kB
-      min_wal_size: 1GB
-      max_wal_size: 4GB
-      pg_stat_statements.max: "10000"
-      pg_stat_statements.track: top
+
 envFrom:
   - secretRef:
       name: huginn
 env:
-  - { name: APP_DATABASE_URL, valueFrom: { secretKeyRef: { name: huginn-app, key: uri } } }
   - { name: APP_REDIS_URL, value: "redis://twitch-stalker-redis-master.default.svc:6379" }
   - { name: APP_PARTITION_ID, value: "0" }
   - { name: APP_KICK_URL, value: "http://huginn-kick.default.svc.cluster.local:3000" }
