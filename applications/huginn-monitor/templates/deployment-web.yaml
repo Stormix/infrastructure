@@ -116,7 +116,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-writer-service
