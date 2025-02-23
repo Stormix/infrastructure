@@ -198,12 +198,6 @@ spec:
             httpGet:
               path: /
               port: 3000
-          resources:
-            requests:
-              memory: {{ .Values.deployments.web.memory }}
-              cpu: {{ .Values.deployments.web.cpu }}
-            limits:
-              memory: {{ .Values.deployments.web.memory }}
           envFrom: {{ .Values.envFrom | toYaml | nindent 12 }}
           env:
             {{- if .Values.env }}
