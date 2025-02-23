@@ -54,7 +54,7 @@ helmCharts:
           storage.tsdb.retention.time: 7d
         persistence:
           enabled: true
-          size: 30Gi
+          size: 5Gi
           accessMode: "ReadWriteOnce"
         resources:
           cpu:

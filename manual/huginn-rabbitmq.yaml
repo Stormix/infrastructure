@@ -20,25 +20,6 @@ spec:
     storageClassName: local-path
     storage: "1Gi"
   affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - huginn-rabbitmq
-        topologyKey: kubernetes.io/hostname
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: Exists
-          - key: kubernetes.io/hostname
-            operator: NotIn
-            values:
-            - worker-1
   override:
     statefulSet:
       spec:
