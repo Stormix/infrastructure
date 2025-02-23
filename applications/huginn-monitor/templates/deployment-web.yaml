@@ -161,6 +161,8 @@ spec:
             {{- end }}
             - name: PORT
               value: "{{ $port }}"
+            - name: APP_NUM_CONSUMERS
+              value: 1
             - name: APP_PARTITION
               valueFrom:
                 fieldRef:
