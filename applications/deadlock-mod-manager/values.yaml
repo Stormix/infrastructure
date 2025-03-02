@@ -11,26 +11,6 @@ deployments:
     port: 9000
     command: bun run src/index.ts
 resources:
-  postgres:
-    replicas: 1
-    memory: 512Mi
-    cpu: 100m
-    disk: 1Gi
-    config:
-      max_connections: "100"
-      shared_buffers: 256MB
-      effective_cache_size: 384MB
-      maintenance_work_mem: 64MB
-      checkpoint_completion_target: "0.9"
-      wal_buffers: 7864kB
-      default_statistics_target: "100"
-      random_page_cost: "1.1"
-      effective_io_concurrency: "200"
-      work_mem: 2621kB
-      min_wal_size: 1GB
-      max_wal_size: 4GB
-      pg_stat_statements.max: "10000"
-      pg_stat_statements.track: top
 envFrom:
   - secretRef:
       name: deadlock-mod-manager # Create a dedicated application secret with k secrets:create deadlock-mod-manager

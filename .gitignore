@@ -3,3 +3,4 @@
 migrate.sh
 *.sql
 tunnel-credentials.json
+old-secrets/
