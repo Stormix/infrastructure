@@ -2,3 +2,4 @@
 .json
 migrate.sh
 *.sql
+tunnel-credentials.json

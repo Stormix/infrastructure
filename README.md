@@ -115,7 +115,7 @@ Create the Cloudflare tunnel:
 
 ```
 cloudflared tunnel login
-cloudflared tunnel --credentials-file tunnel-credentials.json create stormix-k8s
+cloudflared tunnel --credentials-file tunnel-credentials.json create stormix-lab
 kubectl create secret generic tunnel-credentials --dry-run=client --from-file=credentials.json=tunnel-credentials.json -o yaml | kubeseal -o yaml > platform/cloudflared/templates/tunnel-credentials.yaml
 
 echo "" &&
