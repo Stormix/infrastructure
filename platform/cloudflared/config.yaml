@@ -6,6 +6,8 @@ no-autoupdate: true
 ingress:
   - hostname: huginn.k8s.stormix.dev
     service: http://huginn-web
+  - hostname: kicktogether.live
+    service: http://kick-together-web.default.svc:3000
   - hostname: twitch-stalker.stormix.dev
     service: http://twitch-stalker-web.default.svc:3000
   - hostname: api.deadlockmods.app
