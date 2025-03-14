@@ -2,17 +2,10 @@ image: stormix/squad-streams:latest
 deployments:
   web:
     replicas: 1
-    memory: 512Mi
-    cpu: 100m
-    env:
-      - name: WEB_CONCURRENCY
-        value: "2"
     readinessProbePath: /api/health
     port: 3000
     command: bun run src/index.tsx
 envFrom:
   - secretRef:
-      name: kick-together # Create a dedicated application secret with k secrets:create kick-together
-env:
-  - { name: NODE_ENV, value: "production" }
+      name: kick-together
 
