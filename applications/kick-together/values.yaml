@@ -9,7 +9,7 @@ deployments:
         value: "2"
     readinessProbePath: /
     port: 3000
-    command: bun run src/index.ts
+    command: bun run src/index.tsx
 envFrom:
   - secretRef:
       name: kick-together # Create a dedicated application secret with k secrets:create kick-together
