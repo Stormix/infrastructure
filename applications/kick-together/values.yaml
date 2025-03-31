@@ -6,7 +6,7 @@ deployments:
     cpu: 100m
     readinessProbePath: /api/health
     port: 3000
-    command: bun run src/index.tsx
+    command: bun run src/index.ts
 envFrom:
   - secretRef:
       name: kick-together
