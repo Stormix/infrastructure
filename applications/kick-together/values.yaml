@@ -1,9 +1,9 @@
 image: stormix/squad-streams:latest
 deployments:
   web:
-    replicas: 5
-    memory: 1024Mi
-    cpu: 100m
+    replicas: 1
+    memory: 2024Mi
+    cpu: 500m
     readinessProbePath: /api/health
     port: 3000
     command: bun run src/index.ts
