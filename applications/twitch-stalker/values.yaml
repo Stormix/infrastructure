@@ -1,12 +1,9 @@
 image: stormix/twitch-stalker-server:latest
 deployments:
   web:
-    replicas: 3
+    replicas: 0
     memory: 512Mi
     cpu: 100m
-    env:
-      - name: WEB_CONCURRENCY
-        value: "2"
     readinessProbePath: /api/health
     port: 3000
     command: bun start
