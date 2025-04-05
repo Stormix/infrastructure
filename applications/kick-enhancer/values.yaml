@@ -1,0 +1,13 @@
+image: stormix/kick-enhancer:latest
+deployments:
+  web:
+    replicas: 1
+    memory: 512Mi
+    cpu: 100m
+    readinessProbePath: /health
+    port: 3000
+    command: bun start
+resources:
+envFrom:
+  - secretRef:
+      name: kick-enhancer
