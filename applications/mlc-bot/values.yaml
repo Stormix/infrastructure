@@ -1,9 +1,9 @@
 image: stormix/mlc-server:latest
 deployments:
   web:
-    replicas: 3
-    memory: 512Mi
-    cpu: 100m
+    replicas: 1
+    memory: 1024Mi
+    cpu: 250m
     env:
       - name: WEB_CONCURRENCY
         value: "2"
