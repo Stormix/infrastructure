@@ -1,0 +1,15 @@
+image: stormix/mlc-server:latest
+deployments:
+  web:
+    replicas: 3
+    memory: 512Mi
+    cpu: 100m
+    env:
+      - name: WEB_CONCURRENCY
+        value: "2"
+    readinessProbePath: /
+    port: 3000
+    command: bun run --preload src/instrument.ts src/index.ts
+envFrom:
+  - secretRef:
+      name: mlc-server # Create a dedicated application secret with k secrets:create mlc-server
