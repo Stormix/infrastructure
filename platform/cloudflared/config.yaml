@@ -4,24 +4,24 @@ metrics: 0.0.0.0:2000
 no-autoupdate: true
 
 ingress:
-  - hostname: huginn.k8s.stormix.dev
-    service: http://huginn-web
+  # - hostname: huginn.k8s.stormix.dev
+  #   service: http://huginn-web
   - hostname: kicktogether.live
     service: http://kick-together-web.default.svc:3000
   - hostname: watchtogether.tv
     service: http://watch-together-web.default.svc:3000
-  - hostname: kickenhancer.live
-    service: http://kick-enhancer-web.default.svc:3000
+  # - hostname: kickenhancer.live
+  #   service: http://kick-enhancer-web.default.svc:3000
   - hostname: mlc.stormix.dev
     service: http://mlc-server-web.default.svc:3000
-  - hostname: twitch-stalker.stormix.dev
-    service: http://twitch-stalker-web.default.svc:3000
+  # - hostname: twitch-stalker.stormix.dev
+  #   service: http://twitch-stalker-web.default.svc:3000
   - hostname: api.deadlockmods.app
     service: http://deadlock-mod-manager-web.default.svc:9000
-  - hostname: higherlower.stormix.dev
-    service: http://higherlower-live-web.default.svc:3000
-  - hostname: streamstats.stormix.dev
-    service: http://stream-stats-web.default.svc:3000
+  # - hostname: higherlower.stormix.dev
+  #   service: http://higherlower-live-web.default.svc:3000
+  # - hostname: streamstats.stormix.dev
+  #   service: http://stream-stats-web.default.svc:3000
   - hostname: argocd.k8s.stormix.dev
     service: https://argocd-server.argocd.svc
     originRequest:
