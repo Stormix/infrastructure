@@ -2,7 +2,7 @@ image: stormix/deadlock-mods-api:latest
 deployments:
   web:
     replicas: 3
-    memory: 512Mi
+    memory: 250Mi
     cpu: 50m
     env:
       - name: WEB_CONCURRENCY
