@@ -3,7 +3,7 @@ deployments:
   web:
     replicas: 1
     memory: 512Mi
-    cpu: 100m
+    cpu: 50m
     readinessProbePath: /health
     port: 3000
     command: bun start

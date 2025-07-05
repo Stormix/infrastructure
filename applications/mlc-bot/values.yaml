@@ -3,7 +3,7 @@ deployments:
   web:
     replicas: 3
     memory: 1024Mi
-    cpu: 250m
+    cpu: 50m
     env:
       - name: WEB_CONCURRENCY
         value: "2"
