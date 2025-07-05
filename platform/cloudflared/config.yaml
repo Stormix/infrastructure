@@ -8,6 +8,8 @@ ingress:
     service: http://huginn-web
   - hostname: kicktogether.live
     service: http://kick-together-web.default.svc:3000
+  - hostname: watchtogether.tv
+    service: http://watch-together-web.default.svc:3000
   - hostname: kickenhancer.live
     service: http://kick-enhancer-web.default.svc:3000
   - hostname: mlc.stormix.dev

@@ -1,0 +1,13 @@
+image: stormix/watch-together:latest
+deployments:
+  web:
+    replicas: 1
+    memory: 2024Mi
+    cpu: 500m
+    readinessProbePath: /api/health
+    port: 3000
+    command: bun run src/index.ts
+envFrom:
+  - secretRef:
+      name: watch-together
+
