@@ -7,6 +7,12 @@ deployments:
     readinessProbePath: /
     port: 3000
     command: bun run src/index.ts
+  worker:
+    replicas: 1
+    memory: 1024Mi
+    cpu: 250m
+    port: 3000
+    command: bun run src/worker.ts
 resources:
   redis:
     sentinels: 1
