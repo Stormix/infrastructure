@@ -24,7 +24,7 @@ metadata:
   name: {{ .Chart.Name }}
 spec:
   sentinel:
-    replicas: {{ .Values.resources.redis.sentinels }}
+    replicas: 1
     resources:
       requests:
         cpu: 100m
