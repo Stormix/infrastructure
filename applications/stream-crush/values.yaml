@@ -8,8 +8,8 @@ deployments:
     port: 3000
     command: bun run src/index.ts
   redis:
-    sentinels: 3
-    replicas: 2
+    sentinels: 1
+    replicas: 1
     memory: 100Mi
     cpu: 250m
     disk: 500Mi 
