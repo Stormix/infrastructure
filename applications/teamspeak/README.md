@@ -70,7 +70,6 @@ After deployment, the TeamSpeak server will generate initial credentials. To ret
 The deployment accepts several environment variables in `values.yaml`:
 
 - `TS3SERVER_LICENSE`: Set to "accept" to accept the license (required)
-- `TS3_UID`: User ID for the TeamSpeak process (default: 1000)
 
 ### Persistence
 
@@ -102,7 +101,7 @@ Note: This only exposes the query interface. Voice connections will still need t
 
 ## Security Considerations
 
-- The server runs as non-root user (UID/GID 1000)
+- The server runs as non-root user (UID/GID 9987)
 - Uses security contexts for enhanced pod security
 - Network access is controlled via Kubernetes NetworkPolicies (if configured)
 
