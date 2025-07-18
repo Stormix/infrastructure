@@ -60,8 +60,8 @@ talosctl get members
 Before proceeding to the Installation section, ensure to label the worker node with both `worker` and `database` roles to allow scheduling all types of workloads on it (NOTE: on a real production cluster you might want to keep worker and database nodes separate):
 
 ```
-kubectl label nodes reclaim-the-stack-worker-1 node-role.kubernetes.io/worker=
-kubectl label nodes worker-1 node-role.kubernetes.io/database=
+kubectl label nodes worker-4 node-role.kubernetes.io/worker=
+kubectl label nodes worker-4 node-role.kubernetes.io/database=
 ```
 
 ## Installation

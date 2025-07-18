@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+resources:
+  - ./namespace.yaml
+  - ./templates/hcloud-csi-secret.yaml
+  - ./storage-class.yaml
+helmCharts:
+  - name: hcloud-csi
+    repo: https://charts.hetzner.cloud
+    releaseName: hcloud-csi
+    version: 2.13.0  # Check https://charts.hetzner.cloud for latest version
+    namespace: kube-system
+    valuesInline:
+      storageClasses:
+        - name: hetzner-csi-ssd
+          defaultStorageClass: false
+          volumeBindingMode: WaitForFirstConsumer
+          allowVolumeExpansion: true
+          parameters:
+            csi.storage.k8s.io/fstype: ext4
+        - name: hetzner-csi-retain
+          defaultStorageClass: false
+          volumeBindingMode: WaitForFirstConsumer
+          allowVolumeExpansion: true
+          reclaimPolicy: Retain
+          parameters:
+            csi.storage.k8s.io/fstype: ext4
+      controller:
+        hcloudToken:
+          existingSecret:
+            name: hcloud-csi
+            key: token
+        metrics:
+          enabled: true
+        serviceMonitor:
+          enabled: true
+        podAnnotations:
+          linkerd.io/inject: enabled 
