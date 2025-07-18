@@ -14,10 +14,10 @@ deployments:
     command: bun run src/index.ts
 resources:
   postgres:
-    replicas: 2
-    memory: 1Gi
-    cpu: 1
-    disk: 1Gi
+    replicas: 1
+    memory: 512Mi
+    cpu: 500m
+    disk: 10Gi
     # Tip: generate configuration based on CPU / RAM settings at https://pgtune.leopard.in.ua/
     config:
       max_connections: "100"
