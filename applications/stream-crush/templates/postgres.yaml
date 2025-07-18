@@ -6,7 +6,7 @@
 #
 # Example values.yaml:
 # resources:
-#   %{camelName}:
+#   postgres:
 #     replicas: 2
 #     memory: 1Gi
 #     cpu: 1
@@ -28,26 +28,26 @@
 #       pg_stat_statements.max: "10000"
 #       pg_stat_statements.track: top
 # env:
-#   - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: %{application}%{suffix}-app, key: uri } } }
+#   - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: stream-crush-app, key: uri } } }
 
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: {{ .Chart.Name }}%{suffix}
+  name: {{ .Chart.Name }}
 spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16.3
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: false
-  instances: {{ .Values.resources.%{camelName}.replicas }}
+  instances: {{ .Values.resources.postgres.replicas }}
   resources:
     requests:
-      memory: {{ .Values.resources.%{camelName}.memory }}
-      cpu: {{ .Values.resources.%{camelName}.cpu | quote }}
+      memory: {{ .Values.resources.postgres.memory }}
+      cpu: {{ .Values.resources.postgres.cpu | quote }}
     limits:
-      memory: {{ .Values.resources.%{camelName}.memory }}
-      cpu: {{ .Values.resources.%{camelName}.cpu | quote }}
+      memory: {{ .Values.resources.postgres.memory }}
+      cpu: {{ .Values.resources.postgres.cpu | quote }}
   storage:
-    size: {{ .Values.resources.%{camelName}.disk }}
+    size: {{ .Values.resources.postgres.disk }}
     storageClass: hcloud-csi
   bootstrap:
     initdb:
@@ -56,7 +56,7 @@ spec:
         - GRANT pg_create_subscription TO "{{ .Chart.Name }}";
   postgresql:
     parameters:
-      {{ .Values.resources.%{camelName}.config | toYaml | nindent 6 }}
+      {{ .Values.resources.postgres.config | toYaml | nindent 6 }}
   monitoring:
     enablePodMonitor: true
   affinity:
@@ -92,9 +92,9 @@ spec:
 # apiVersion: postgresql.cnpg.io/v1
 # kind: ScheduledBackup
 # metadata:
-#   name: {{ .Chart.Name }}%{suffix}
+#   name: {{ .Chart.Name }}
 # spec:
 #   schedule: "0 0 1 * * *" # At 01:00 every day
 #   backupOwnerReference: self
 #   cluster:
-#     name: {{ .Chart.Name }}%{suffix}
+#     name: {{ .Chart.Name }}

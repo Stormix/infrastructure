@@ -13,13 +13,35 @@ deployments:
     port: 3000
     command: bun run src/index.ts
 resources:
+  postgres:
+    replicas: 2
+    memory: 1Gi
+    cpu: 1
+    disk: 1Gi
+    # Tip: generate configuration based on CPU / RAM settings at https://pgtune.leopard.in.ua/
+    config:
+      max_connections: "100"
+      shared_buffers: 256MB
+      effective_cache_size: 768MB
+      maintenance_work_mem: 64MB
+      checkpoint_completion_target: "0.9"
+      wal_buffers: 7864kB
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "200"
+      work_mem: 2427kB
+      min_wal_size: 1GB
+      max_wal_size: 4GB
+      pg_stat_statements.max: "10000"
+      pg_stat_statements.track: top
   redis:
     sentinels: 1
     replicas: 1
     memory: 100Mi
     cpu: 250m
     disk: 500Mi 
-env: 
+env:
+  - { name: NEW_DATABASE_URL, valueFrom: { secretKeyRef: { name: stream-crush-app, key: uri } } }
   - { name: REDIS_URL, value: "redis://stream-crush-redis-master.default.svc:6379" }
 envFrom:
   - secretRef:
