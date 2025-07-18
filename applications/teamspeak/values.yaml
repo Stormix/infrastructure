@@ -1,4 +1,4 @@
-image: library/teamspeak:latest
+image: teamspeak:latest
 
 replicaCount: 1
 
@@ -38,17 +38,15 @@ resources:
 env:
   - name: TS3SERVER_LICENSE
     value: "accept"
-  - name: TS3_UID
-    value: "1000"
 
 nodeSelector: {}
 tolerations: []
 affinity: {}
 
 securityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
-  fsGroup: 1000
+  runAsUser: 9987
+  runAsGroup: 9987
+  fsGroup: 9987
 
 podSecurityContext:
   runAsNonRoot: true 

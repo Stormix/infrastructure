@@ -5,7 +5,7 @@ This Helm chart deploys a TeamSpeak 3 server in your Kubernetes cluster with per
 ## Features
 
 - TeamSpeak 3 Server (latest version)
-- Ubuntu-based container from devalx/docker-teamspeak3
+- Official Docker Hub image (teamspeak:latest)
 - Persistent data storage for server configuration and virtual servers
 - NodePort service for direct node access
 - Configurable resource limits and requests
@@ -74,7 +74,7 @@ The deployment accepts several environment variables in `values.yaml`:
 
 ### Persistence
 
-By default, persistence is enabled with 1Gi storage. The data is mounted at `/home/ts3/data` and includes:
+By default, persistence is enabled with 1Gi storage. The data is mounted at `/var/ts3server` and includes:
 - Server configuration
 - Virtual server data
 - User permissions
