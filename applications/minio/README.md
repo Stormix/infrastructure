@@ -34,6 +34,15 @@ The MinIO deployment is configured via `values.yaml`:
 - **Replicas**: 1 (single-node deployment)
 - **Security**: Non-root container with dedicated user/group
 
+### External URL Configuration
+
+MinIO is configured with the following environment variables to ensure proper external URL generation:
+
+- `MINIO_SERVER_URL`: Set to `https://minio-api.k8s.stormix.dev` - ensures presigned URLs and object links use the correct external domain
+- `MINIO_BROWSER_REDIRECT_URL`: Set to `https://minio.k8s.stormix.dev` - ensures console redirects work properly
+
+This prevents issues where MinIO would generate links starting with `http://127.0.0.1:9000/` instead of your proper external URLs.
+
 ## Credentials Management
 
 Credentials are managed via sealed secrets in `applications/shared-secrets/minio.yaml`:
