@@ -1,0 +1,103 @@
+# MinIO Configuration
+image:
+  repository: quay.io/minio/minio
+  tag: "RELEASE.2024-01-16T16-07-38Z"
+  pullPolicy: IfNotPresent
+
+# Number of MinIO instances
+replicaCount: 1
+
+# MinIO credentials (managed via sealed secrets)
+secretName: minio
+
+# Storage configuration
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+  mountPath: /data
+
+# Service configuration
+service:
+  type: ClusterIP
+  api:
+    port: 9000
+    targetPort: 9000
+  console:
+    port: 9001
+    targetPort: 9001
+
+# Ingress configuration for web console access (disabled, using cloudflared instead)
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - host: minio.k8s.stormix.dev
+      paths:
+        - path: /
+          pathType: Prefix
+          service: console
+    - host: minio-api.k8s.stormix.dev
+      paths:
+        - path: /
+          pathType: Prefix
+          service: api
+  tls:
+    - secretName: minio-tls
+      hosts:
+        - minio.k8s.stormix.dev
+        - minio-api.k8s.stormix.dev
+
+# Resource limits and requests
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 1Gi
+    cpu: 500m
+
+# Health checks
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /minio/health/live
+    port: 9000
+  initialDelaySeconds: 30
+  periodSeconds: 30
+  timeoutSeconds: 10
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /minio/health/ready
+    port: 9000
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+
+# Security context
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  runAsNonRoot: true
+
+podSecurityContext:
+  fsGroup: 1000
+
+# Node selection
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Additional environment variables
+extraEnv: []
+
+# MinIO console configuration
+console:
+  enabled: true 

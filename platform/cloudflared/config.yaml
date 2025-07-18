@@ -22,6 +22,10 @@ ingress:
   #   service: http://twitch-stalker-web.default.svc:3000
   - hostname: api.deadlockmods.app
     service: http://deadlock-mod-manager-web.default.svc:9000
+  - hostname: minio.k8s.stormix.dev
+    service: http://minio-console.default.svc:9001
+  - hostname: minio-api.k8s.stormix.dev
+    service: http://minio.default.svc:9000
   # - hostname: higherlower.stormix.dev
   #   service: http://higherlower-live-web.default.svc:3000
   # - hostname: streamstats.stormix.dev
