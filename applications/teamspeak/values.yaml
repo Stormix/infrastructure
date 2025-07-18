@@ -3,7 +3,7 @@ image: teamspeak:latest
 replicaCount: 1
 
 service:
-  type: LoadBalancer
+  type: NodePort
   ports:
     voice:
       port: 9987
