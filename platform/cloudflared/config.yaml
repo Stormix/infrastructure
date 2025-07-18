@@ -4,6 +4,8 @@ metrics: 0.0.0.0:2000
 no-autoupdate: true
 
 ingress:
+  - hostname: teamspeak.k8s.stormix.dev
+    service: http://teamspeak.default.svc:10011
   # - hostname: huginn.k8s.stormix.dev
   #   service: http://huginn-web
   - hostname: kicktogether.live

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "teamspeak.fullname" . }}
+  labels:
+    {{- include "teamspeak.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.ports.voice.port }}
+      targetPort: {{ .Values.service.ports.voice.targetPort }}
+      protocol: {{ .Values.service.ports.voice.protocol }}
+      name: voice
+      {{- if and (eq .Values.service.type "NodePort") (.Values.service.ports.voice.nodePort) }}
+      nodePort: {{ .Values.service.ports.voice.nodePort }}
+      {{- end }}
+    - port: {{ .Values.service.ports.query.port }}
+      targetPort: {{ .Values.service.ports.query.targetPort }}
+      protocol: {{ .Values.service.ports.query.protocol }}
+      name: query
+      {{- if and (eq .Values.service.type "NodePort") (.Values.service.ports.query.nodePort) }}
+      nodePort: {{ .Values.service.ports.query.nodePort }}
+      {{- end }}
+    - port: {{ .Values.service.ports.file.port }}
+      targetPort: {{ .Values.service.ports.file.targetPort }}
+      protocol: {{ .Values.service.ports.file.protocol }}
+      name: file
+      {{- if and (eq .Values.service.type "NodePort") (.Values.service.ports.file.nodePort) }}
+      nodePort: {{ .Values.service.ports.file.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "teamspeak.selectorLabels" . | nindent 4 }} 

@@ -1,0 +1,68 @@
+image: teamspeak:3.13.7-alpine
+
+replicaCount: 1
+
+service:
+  type: NodePort
+  ports:
+    voice:
+      port: 9987
+      targetPort: 9987
+      nodePort: 30987
+      protocol: UDP
+    query:
+      port: 10011
+      targetPort: 10011
+      nodePort: 30011
+      protocol: TCP
+    file:
+      port: 30033
+      targetPort: 30033
+      nodePort: 30033
+      protocol: TCP
+
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+resources:
+  requests:
+    memory: 64Mi
+    cpu: 50m
+  limits:
+    memory: 128Mi
+    cpu: 100m
+
+env:
+  - name: TS3SERVER_LICENSE
+    value: "accept"
+  - name: TS3SERVER_DB_PLUGIN
+    value: "ts3db_sqlite3"
+  - name: TS3SERVER_DB_SQLCREATEPATH
+    value: "create_sqlite"
+  - name: TS3SERVER_DB_HOST
+    value: ""
+  - name: TS3SERVER_DB_USER
+    value: ""
+  - name: TS3SERVER_DB_PASSWORD
+    value: ""
+  - name: TS3SERVER_DB_NAME
+    value: ""
+  - name: TS3SERVER_DB_WAITUNTILREADY
+    value: "30"
+  - name: TS3SERVER_MACHINE_ID
+    value: ""
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+securityContext:
+  runAsUser: 9987
+  runAsGroup: 9987
+  fsGroup: 9987
+
+podSecurityContext:
+  runAsNonRoot: true 
