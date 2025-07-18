@@ -53,19 +53,13 @@ The Hetzner CSI driver will be automatically deployed via ArgoCD when you:
 
 The following storage classes are available:
 
-### hetzner-csi-default
+### hcloud-csi
 - **Use case**: General purpose persistent volumes
 - **Reclaim policy**: Delete
 - **Volume expansion**: Enabled
 - **File system**: ext4
 
-### hetzner-csi-fast
-- **Use case**: Performance-sensitive workloads
-- **Reclaim policy**: Delete
-- **Volume expansion**: Enabled
-- **File system**: ext4
-
-### hetzner-csi-retain
+### hcloud-csi-retain
 - **Use case**: Data that should persist even after PVC deletion
 - **Reclaim policy**: Retain
 - **Volume expansion**: Enabled
@@ -83,7 +77,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: hetzner-csi-default
+  storageClassName: hcloud-csi
   resources:
     requests:
       storage: 10Gi
@@ -118,7 +112,7 @@ spec:
       name: data
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: hetzner-csi-default
+      storageClassName: hcloud-csi
       resources:
         requests:
           storage: 20Gi
