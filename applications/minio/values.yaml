@@ -96,7 +96,11 @@ tolerations: []
 affinity: {}
 
 # Additional environment variables
-extraEnv: []
+extraEnv:
+  - name: MINIO_SERVER_URL
+    value: "https://minio-api.k8s.stormix.dev"
+  - name: MINIO_BROWSER_REDIRECT_URL
+    value: "https://minio.k8s.stormix.dev"
 
 # MinIO console configuration
 console:
