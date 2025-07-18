@@ -51,7 +51,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: data
-              mountPath: /var/ts3server
+              mountPath: /home/ts3/data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           livenessProbe:

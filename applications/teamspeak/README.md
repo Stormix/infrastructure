@@ -4,7 +4,8 @@ This Helm chart deploys a TeamSpeak 3 server in your Kubernetes cluster with per
 
 ## Features
 
-- TeamSpeak 3.13.7 Alpine-based container
+- TeamSpeak 3 Server (latest version)
+- Ubuntu-based container from devalx/docker-teamspeak3
 - Persistent data storage for server configuration and virtual servers
 - NodePort service for direct node access
 - Configurable resource limits and requests
@@ -68,13 +69,12 @@ After deployment, the TeamSpeak server will generate initial credentials. To ret
 
 The deployment accepts several environment variables in `values.yaml`:
 
-- `TS3SERVER_LICENSE`: Set to "accept" to accept the license
-- `TS3SERVER_DB_PLUGIN`: Database plugin (default: ts3db_sqlite3)
-- `TS3SERVER_MACHINE_ID`: Optional machine ID for licensing
+- `TS3SERVER_LICENSE`: Set to "accept" to accept the license (required)
+- `TS3_UID`: User ID for the TeamSpeak process (default: 1000)
 
 ### Persistence
 
-By default, persistence is enabled with 1Gi storage. The data is mounted at `/var/ts3server` and includes:
+By default, persistence is enabled with 1Gi storage. The data is mounted at `/home/ts3/data` and includes:
 - Server configuration
 - Virtual server data
 - User permissions
@@ -83,8 +83,8 @@ By default, persistence is enabled with 1Gi storage. The data is mounted at `/va
 ### Resources
 
 Default resource allocation:
-- **Requests**: 64Mi RAM, 50m CPU
-- **Limits**: 128Mi RAM, 100m CPU
+- **Requests**: 128Mi RAM, 100m CPU
+- **Limits**: 256Mi RAM, 200m CPU
 
 ## Accessing via Cloudflared (Optional)
 
@@ -102,7 +102,7 @@ Note: This only exposes the query interface. Voice connections will still need t
 
 ## Security Considerations
 
-- The server runs as non-root user (UID/GID 9987)
+- The server runs as non-root user (UID/GID 1000)
 - Uses security contexts for enhanced pod security
 - Network access is controlled via Kubernetes NetworkPolicies (if configured)
 
