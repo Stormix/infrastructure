@@ -13,7 +13,7 @@ secretName: minio
 # Storage configuration
 persistence:
   enabled: true
-  storageClass: ""
+  storageClass: "hcloud-csi"
   accessMode: ReadWriteOnce
   size: 10Gi
   mountPath: /data

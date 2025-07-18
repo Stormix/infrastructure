@@ -62,7 +62,7 @@ kubectl create secret generic minio \
 ## Storage
 
 - **Default Size**: 10Gi
-- **Storage Class**: Uses cluster default (hcloud-csi for Hetzner)
+- **Storage Class**: hcloud-csi (Hetzner Cloud Storage Interface)
 - **Access Mode**: ReadWriteOnce
 - **Mount Path**: `/data`
 
