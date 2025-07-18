@@ -1,4 +1,4 @@
-image: devalx/docker-teamspeak3:latest
+image: library/teamspeak:latest
 
 replicaCount: 1
 
