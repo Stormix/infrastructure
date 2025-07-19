@@ -6,6 +6,8 @@ no-autoupdate: true
 ingress:
   - hostname: teamspeak.k8s.stormix.dev
     service: http://teamspeak.default.svc:10011
+  - hostname: lgamila-api.stormix.dev
+    service: http://moroccan-stream-web.default.svc:3000
   # - hostname: huginn.k8s.stormix.dev
   #   service: http://huginn-web
   - hostname: kicktogether.live
