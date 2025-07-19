@@ -2,7 +2,7 @@ image: stormix/moroccan-stream:latest
 deployments:
   webWorker:
     replicas: 1
-    memory: 512Mi
+    memory: 2Gi
     cpu: 250m
     command: bun run src/worker.ts
   web:
