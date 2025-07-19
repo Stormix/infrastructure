@@ -43,6 +43,7 @@ resources:
 
 env:
   - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: moroccan-stream-app, key: uri } } }
+  - { name: REDIS_URL, value: "redis://moroccan-stream-redis-master.default.svc:6379" }
 envFrom:
   - secretRef:
       name: moroccan-stream
