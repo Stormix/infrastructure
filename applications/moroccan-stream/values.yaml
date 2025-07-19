@@ -34,6 +34,13 @@ resources:
       max_wal_size: 4GB
       pg_stat_statements.max: "10000"
       pg_stat_statements.track: top
+  redis:
+    sentinels: 1
+    replicas: 1
+    memory: 100Mi
+    cpu: 250m
+    disk: 500Mi
+
 env:
   - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: moroccan-stream-app, key: uri } } }
 envFrom:
